@@ -1,0 +1,30 @@
+[
+    {
+      "description": "Valid XML input should insert into database successfully",
+      "input": "<root><row><student_id>1</student_id><Name>John Doe</Name><Gender>Male</Gender><session_id>101</session_id><Class_roll>15</Class_roll><Exam_roll>2001</Exam_roll><Registration_no>REG1234</Registration_no><Email>john.doe@example.com</Email><Password>password123</Password><Phone>1234567890</Phone></row></root>",
+      "executionCondition": "Database query succeeds",
+      "expectedOutput": {
+        "status": 200,
+        "message": "XML data imported successfully."
+      }
+    },
+    {
+      "description": "Invalid XML input should return an error",
+      "input": "<root><row><student_id>2</student_id><Name>Jane Doe</Name><Gender></Gender><session_id></session_id></row></root>",
+      "executionCondition": "Incomplete rows",
+      "expectedOutput": {
+        "status": 400,
+        "message": "Invalid XML data"
+      }
+    },
+    {
+      "description": "Database error should be handled gracefully",
+      "input": "<root><row><student_id>1</student_id><Name>John Doe</Name><Gender>Male</Gender><session_id>101</session_id><Class_roll>15</Class_roll><Exam_roll>2001</Exam_roll><Registration_no>REG1234</Registration_no><Email>john.doe@example.com</Email><Password>password123</Password><Phone>1234567890</Phone></row></root>",
+      "executionCondition": "Database query fails",
+      "expectedOutput": {
+        "status": 500,
+        "message": "Error importing XML data."
+      }
+    }
+  ]
+  
